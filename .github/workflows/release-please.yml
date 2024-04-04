@@ -19,5 +19,5 @@ jobs:
 # - uses: google-github-actions/release-please-action@v3
 #   with:
 #     release-type: node
-#     package-name: react-package-template
+#     package-name: use-backlog
 #     bump-minor-pre-major: true
