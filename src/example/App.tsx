@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useBacklog } from "..";
+import { useBacklog, useProjects } from "..";
 
 function App() {
   const initialHost = import.meta.env.VITE_BACKLOG_HOST ?? "";
@@ -9,6 +9,8 @@ function App() {
   const [apiKey, setApiKey] = useState<string>(initialApiKey);
 
   const { setConfig } = useBacklog();
+
+  const { projects } = useProjects();
 
   const save = () => {
     setConfig?.({ host, apiKey });
@@ -39,6 +41,17 @@ function App() {
         </div>
 
         <button onClick={save}>Save</button>
+      </section>
+
+      <section>
+        <h3>Projects</h3>
+        {projects && (
+          <ul>
+            {projects.map((project) => (
+              <li key={project.id}>{project.name}</li>
+            ))}
+          </ul>
+        )}
       </section>
     </div>
   );
