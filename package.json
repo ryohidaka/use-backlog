@@ -66,5 +66,8 @@
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
+  },
+  "dependencies": {
+    "backlog-js": "^0.13.1"
   }
 }
