@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useBacklog, useProjects } from "..";
+import { useBacklog, useIssues, useProjects } from "..";
 
 function App() {
   const initialHost = import.meta.env.VITE_BACKLOG_HOST ?? "";
@@ -11,6 +11,14 @@ function App() {
   const { setConfig } = useBacklog();
 
   const { projects } = useProjects();
+  const { issues, size, setSize } = useIssues(
+    { count: 3 },
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: true,
+      revalidateFirstPage: true,
+    },
+  );
 
   const save = () => {
     setConfig?.({ host, apiKey });
@@ -52,6 +60,18 @@ function App() {
             ))}
           </ul>
         )}
+      </section>
+
+      <section>
+        <h3>Issues</h3>
+        {issues && (
+          <ul>
+            {issues.map((issue) => (
+              <li key={issue.id}>{issue.summary}</li>
+            ))}
+          </ul>
+        )}
+        <button onClick={() => setSize(size + 1)}>More</button>
       </section>
     </div>
   );
