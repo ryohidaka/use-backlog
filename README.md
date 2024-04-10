@@ -36,7 +36,36 @@ ReactDOM.render(
 );
 ```
 
+Use the provided hooks to fetch Backlog data:
+
+- useProjects
+
+```tsx
+import { useProjects } from "use-backlog";
+
+function App() {
+  const { projects, isLoading } = useProjects();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  return (
+    <>
+      <ul>
+        {projects?.map((project) => <li key={project.id}>{project.name}</li>)}
+      </ul>
+    </>
+  );
+}
+
+export default App;
+```
+
 ## API
+
+### Hooks
+
+- `useProjects(params, swrConfig)` - Fetch multiple projects.
 
 ### BacklogProvider
 
