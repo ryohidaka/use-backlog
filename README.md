@@ -41,6 +41,7 @@ Use the provided hooks to fetch Backlog data:
 - useProjects
 - useProject
 - useIssues
+- useIssue
 
 ```tsx
 import { useProjects } from "use-backlog";
@@ -72,6 +73,8 @@ export default App;
 - `useProject(projectIdOrKey, swrConfig)` - Get a project.
 
 - `useIssues(params, swrConfig)` - Get a list of issues in a project.
+
+- `useIssue(issueIdOrKey, swrConfig)` - Get a issue.
 
 ### BacklogProvider
 
