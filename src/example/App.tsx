@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useBacklog, useIssues, useProject, useProjects } from "..";
+import { useBacklog, useIssue, useIssues, useProject, useProjects } from "..";
 import { Preview } from "./Preview";
 
 function App() {
@@ -23,6 +23,9 @@ function App() {
       revalidateFirstPage: true,
     },
   );
+
+  const issueId = issues ? issues[0]?.id : 0;
+  const { issue } = useIssue(issueId);
 
   const save = () => {
     setConfig?.({ host, apiKey });
@@ -81,6 +84,11 @@ function App() {
           </ul>
         )}
         <button onClick={() => setSize(size + 1)}>More</button>
+      </section>
+
+      <section>
+        <h3>Issue</h3>
+        {issue && <Preview value={issue} />}
       </section>
     </div>
   );

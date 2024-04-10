@@ -3,6 +3,7 @@ import { getCount } from "@/utils";
 import { Issue as IssueEntity } from "backlog-js/dist/types/entity";
 import { Issue as IssueOption } from "backlog-js/dist/types/option";
 import { useMemo } from "react";
+import useSWR, { SWRConfiguration } from "swr";
 import useSWRInfinite, { SWRInfiniteConfiguration } from "swr/infinite";
 
 /**
@@ -56,4 +57,36 @@ export const useIssues = (
 
   // Return the fetched issues and the rest of the response
   return { issues: issues?.flat() as IssueEntity.Issue[], ...rest };
+};
+
+/**
+ * useIssue is a custom hook for fetching an issue from Backlog.
+ *
+ * @param {string | number} issueIdOrKey - The ID or key of the issue to fetch.
+ * @param {SWRConfiguration} swrConfig - The configuration object for SWR.
+ * @returns {Object} The fetched issue and the rest of the response from useSWR.
+ */
+export const useIssue = (
+  issueIdOrKey: string | number,
+  swrConfig?: SWRConfiguration,
+) => {
+  // Getting the backlog instance
+  const { backlog } = useBacklog();
+
+  // Defining the fetcher function
+  const fetcher = async () => {
+    if (!backlog) return null;
+    // Fetching the issue from Backlog
+    const issue = await backlog.getIssue(issueIdOrKey);
+    return issue;
+  };
+
+  // Define the cache key for useSWR
+  const key = `issue-${issueIdOrKey}`;
+
+  // Using the useSWR hook to fetch the data
+  const { data: issue, ...rest } = useSWR(key, fetcher, swrConfig);
+
+  // Returning the fetched issue and the rest of the response
+  return { issue, ...rest };
 };
