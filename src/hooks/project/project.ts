@@ -31,3 +31,33 @@ export const useProjects = (
   // Returning the fetched projects and the rest of the response
   return { projects, ...rest };
 };
+
+/**
+ * useProject is a custom hook that fetches a project from Backlog.
+ *
+ * @param {string | number} projectIdOrKey - The ID or key of the project to fetch.
+ * @returns {Object} An object containing the fetched project and the rest of the response.
+ */
+export const useProject = (
+  projectIdOrKey: string | number,
+  swrConfig?: SWRConfiguration,
+) => {
+  // Getting the backlog instance
+  const { backlog } = useBacklog();
+
+  // Defining the fetcher function
+  const fetcher = async () => {
+    if (!backlog) return undefined;
+    // Fetching the project from Backlog
+    const project = await backlog.getProject(projectIdOrKey);
+    return project;
+  };
+
+  const key = `project-${projectIdOrKey}`;
+
+  // Using the useSWR hook to fetch the data
+  const { data: project, ...rest } = useSWR(key, fetcher, swrConfig);
+
+  // Returning the fetched project and the rest of the response
+  return { project, ...rest };
+};

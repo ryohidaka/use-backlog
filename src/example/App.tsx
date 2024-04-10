@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useBacklog, useIssues, useProjects } from "..";
+import { useBacklog, useIssues, useProject, useProjects } from "..";
+import { Preview } from "./Preview";
 
 function App() {
   const initialHost = import.meta.env.VITE_BACKLOG_HOST ?? "";
@@ -11,6 +12,9 @@ function App() {
   const { setConfig } = useBacklog();
 
   const { projects } = useProjects();
+  const projectId = projects ? projects[0]?.id : 0;
+  const { project } = useProject(projectId);
+
   const { issues, size, setSize } = useIssues(
     { count: 3 },
     {
@@ -60,6 +64,11 @@ function App() {
             ))}
           </ul>
         )}
+      </section>
+
+      <section>
+        <h3>Project</h3>
+        {project && <Preview value={project} />}
       </section>
 
       <section>
