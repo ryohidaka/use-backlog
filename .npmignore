@@ -22,3 +22,6 @@ setup.ts
 ## Vite
 vite.config.ts
 public
+
+## Environment
+.env.*
