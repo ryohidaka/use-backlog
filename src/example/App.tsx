@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useBacklog, useIssue, useIssues, useProject, useProjects } from "..";
 import { Preview } from "./Preview";
+import { useMyself } from "@/hooks/user";
 
 function App() {
   const initialHost = import.meta.env.VITE_BACKLOG_HOST ?? "";
@@ -26,6 +27,8 @@ function App() {
 
   const issueId = issues ? issues[0]?.id : 0;
   const { issue } = useIssue(issueId);
+
+  const { myself } = useMyself();
 
   const save = () => {
     setConfig?.({ host, apiKey });
@@ -89,6 +92,11 @@ function App() {
       <section>
         <h3>Issue</h3>
         {issue && <Preview value={issue} />}
+      </section>
+
+      <section>
+        <h3>Myself</h3>
+        {myself && <Preview value={myself} />}
       </section>
     </div>
   );
