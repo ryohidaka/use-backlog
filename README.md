@@ -9,9 +9,7 @@
 
 ## Overview
 
-React Hooks library for Backlog.
-
-## Notes
+React Hooks library for [Backlog](https://backlog.com/).
 
 ## Installation
 
@@ -23,7 +21,32 @@ npm install use-backlog
 
 ## Usage
 
+Wrap your app with the `BacklogProvider` and provide `host` and `apiKey` property.
+
+```tsx
+import { BacklogProvider } from "use-backlog";
+
+ReactDOM.render(
+  <React.StrictMode>
+    <BacklogProvider host="example.backlog.com" apiKey="{apiKey}">
+      <App />
+    </BacklogProvider>
+  </React.StrictMode>,
+  document.getElementById("root"),
+);
+```
+
+## API
+
+### BacklogProvider
+
+The `BacklogProvider` component should be used to wrap your app.
+
 ## Link
+
+- [Backlog](https://backlog.com/)
+- [backlog-js](https://github.com/nulab/backlog-js)
+- [Docs for Backlog API](https://developer.nulab.com/docs/backlog)
 
 ## License
 
