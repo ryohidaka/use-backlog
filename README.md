@@ -39,6 +39,7 @@ ReactDOM.render(
 Use the provided hooks to fetch Backlog data:
 
 - useProjects
+- useProject
 - useIssues
 
 ```tsx
@@ -67,6 +68,8 @@ export default App;
 ### Hooks
 
 - `useProjects(params, swrConfig)` - Fetch multiple projects.
+
+- `useProject(projectIdOrKey, swrConfig)` - Get a project.
 
 - `useIssues(params, swrConfig)` - Get a list of issues in a project.
 
