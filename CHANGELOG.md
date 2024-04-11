@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.1](https://github.com/ryohidaka/use-backlog/compare/v0.1.0...v0.1.1) (2024-04-11)
+
+
+### Bug Fixes
+
+* Change useIssues from useSWRInfinite to useSWR. ([bce0a57](https://github.com/ryohidaka/use-backlog/commit/bce0a57c00878e8b7b46729b3c3765ed296f0d5b))
+* Modify export process. ([de85e94](https://github.com/ryohidaka/use-backlog/commit/de85e940fd3ba81ca052a12150b3bfaf2e8f768a))
+
 ## 0.1.0 (2024-04-10)
 
 
