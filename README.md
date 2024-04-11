@@ -28,7 +28,7 @@ import { BacklogProvider } from "use-backlog";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BacklogProvider host="example.backlog.com" apiKey="{apiKey}">
+    <BacklogProvider>
       <App />
     </BacklogProvider>
   </React.StrictMode>,
@@ -48,7 +48,10 @@ Use the provided hooks to fetch Backlog data:
 import { useProjects } from "use-backlog";
 
 function App() {
+  const { setConfig } = useBacklog();
   const { projects, isLoading } = useProjects();
+
+  setConfig?.({ host: "example.com", apiKey: "hogehoge" });
 
   if (isLoading) {
     return <div>Loading...</div>;
