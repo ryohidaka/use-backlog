@@ -16,14 +16,7 @@ function App() {
   const projectId = projects ? projects[0]?.id : 0;
   const { project } = useProject(projectId);
 
-  const { issues, size, setSize } = useIssues(
-    { count: 3 },
-    {
-      revalidateIfStale: false,
-      revalidateOnFocus: true,
-      revalidateFirstPage: true,
-    },
-  );
+  const { issues } = useIssues({ count: 3 });
 
   const issueId = issues ? issues[0]?.id : 0;
   const { issue } = useIssue(issueId);
@@ -86,7 +79,6 @@ function App() {
             ))}
           </ul>
         )}
-        <button onClick={() => setSize(size + 1)}>More</button>
       </section>
 
       <section>
