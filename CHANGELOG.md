@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/ryohidaka/use-backlog/compare/v0.1.2...v0.1.3) (2024-05-06)
+
+
+### Miscellaneous Chores
+
+* release 0.1.3 ([52be4c9](https://github.com/ryohidaka/use-backlog/commit/52be4c94f1d2b74b651fad766a3431365ebc2041))
+
 ## [0.1.2](https://github.com/ryohidaka/use-backlog/compare/v0.1.1...v0.1.2) (2024-04-11)
 
 
