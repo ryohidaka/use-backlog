@@ -1,6 +1,7 @@
 import { useBacklog } from "@/provider";
 
 import { Project } from "backlog-js/dist/types/option";
+import { useMemo } from "react";
 
 import useSWR, { SWRConfiguration } from "swr";
 
@@ -16,6 +17,13 @@ export const useProjects = (
   // Getting the backlog instance
   const { backlog } = useBacklog();
 
+  // Define the cache key for useSWR
+  const key = useMemo(() => {
+    if (!backlog) return null;
+
+    return `projects-${JSON.stringify(params)}`;
+  }, [backlog, params]);
+
   // Defining the fetcher function
   const fetcher = async () => {
     if (!backlog) return [];
@@ -26,7 +34,7 @@ export const useProjects = (
   };
 
   // Using the useSWR hook to fetch the data
-  const { data: projects, ...rest } = useSWR("projects", fetcher, swrConfig);
+  const { data: projects, ...rest } = useSWR(key, fetcher, swrConfig);
 
   // Returning the fetched projects and the rest of the response
   return { projects, ...rest };
