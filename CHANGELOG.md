@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.4](https://github.com/ryohidaka/use-backlog/compare/v0.1.3...v0.1.4) (2024-05-08)
+
+
+### Bug Fixes
+
+* Do not generate key if backlog instance is null. ([9933af8](https://github.com/ryohidaka/use-backlog/commit/9933af8e2977f2f4074c839e899cbd84b5791846))
+* Regenerate keys when parameters are changed. ([60db518](https://github.com/ryohidaka/use-backlog/commit/60db518864224362428d60fa3ed35d03d8fd2838))
+
 ## [0.1.3](https://github.com/ryohidaka/use-backlog/compare/v0.1.2...v0.1.3) (2024-05-06)
 
 
