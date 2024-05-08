@@ -45,7 +45,7 @@ Use the provided hooks to fetch Backlog data:
 - useMyself
 
 ```tsx
-import { useProjects } from "use-backlog";
+import { useBacklog, useProjects } from "use-backlog";
 
 function App() {
   const { setConfig } = useBacklog();
