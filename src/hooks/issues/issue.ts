@@ -1,42 +1,62 @@
 import { useBacklog } from "@/provider";
+import { getCount } from "@/utils";
+import { Issue as IssueEntity } from "backlog-js/dist/types/entity";
 import { Issue as IssueOption } from "backlog-js/dist/types/option";
 import { useMemo } from "react";
 import useSWR, { SWRConfiguration } from "swr";
+import useSWRInfinite, { SWRInfiniteConfiguration } from "swr/infinite";
 
 /**
  * `useIssues` is a custom hook for fetching issues from Backlog.
  * @param {IssueOption.GetIssuesParams} params - The parameters for getting issues.
- * @param {SWRConfiguration} swrConfig - The configuration options for SWR.
+ * @param {SWRInfiniteConfiguration} swrConfig - The configuration options for SWR.
  * @returns {Object} An object containing the fetched issues and the rest of the response from useSWRInfinite.
  */
 export const useIssues = (
   params?: IssueOption.GetIssuesParams,
-  swrConfig?: SWRConfiguration,
+  swrConfig?: SWRInfiniteConfiguration,
 ) => {
-  // Getting the backlog instance
+  // Get the backlog instance
   const { backlog } = useBacklog();
 
-  // Define the cache key for useSWR
-  const key = useMemo(() => {
-    if (!backlog) return null;
+  // Check if params.count is undefined or NaN, if so, set it to 20
+  const { count, paramsString } = useMemo(() => {
+    const count = getCount(params?.count);
+    const paramsString = JSON.stringify(params);
+    return { count, paramsString };
+  }, [params]);
 
-    return `issues-${JSON.stringify(params)}`;
-  }, [backlog, params]);
+  // Define the getKey function
+  const getKey = (pageIndex: number, previousPageData: IssueEntity.Issue[]) => {
+    // If the previous page data is not empty and its length is less than count, return null to stop pagination
+    if (previousPageData && previousPageData.length < count) return null;
+    return [pageIndex, paramsString];
+  };
 
-  // Defining the fetcher function
-  const fetcher = async () => {
+  // Define the fetcher function
+  const fetcher = async (
+    pageIndex: any[],
+    previousPageData: IssueEntity.Issue[],
+  ) => {
     if (!backlog) return [];
+    // If the previous page data was not empty but the length is less than count, return an empty array to stop pagination
+    if (previousPageData && previousPageData.length < count) return [];
 
     // Fetch the issues from Backlog
-    const issues = await backlog.getIssues(params);
+    const issues = await backlog.getIssues({
+      ...params,
+      count,
+      offset: parseInt(pageIndex[0], 10) * count,
+    });
+
     return issues;
   };
 
-  // Using the useSWR hook to fetch the data
-  const { data: issues, ...rest } = useSWR(key, fetcher, swrConfig);
+  // Use the useSWRInfinite hook to fetch the data
+  const { data: issues, ...rest } = useSWRInfinite(getKey, fetcher, swrConfig);
 
   // Return the fetched issues and the rest of the response
-  return { issues, ...rest };
+  return { issues: issues?.flat() as IssueEntity.Issue[], ...rest };
 };
 
 /**

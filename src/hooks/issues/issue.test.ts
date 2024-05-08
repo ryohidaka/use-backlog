@@ -24,7 +24,10 @@ describe("useIssues", () => {
     await waitFor(() => result.current.issues !== undefined);
 
     // Check that the API was called with the correct options
-    expect(mockApi.getIssues).toHaveBeenCalledWith(undefined);
+    expect(mockApi.getIssues).toHaveBeenCalledWith({
+      count: 20,
+      offset: 0,
+    });
 
     // Check that the hook returns the correct data
     expect(result.current.issues).toEqual(mockIssues);
