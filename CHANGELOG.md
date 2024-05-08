@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.5](https://github.com/ryohidaka/use-backlog/compare/v0.1.4...v0.1.5) (2024-05-08)
+
+
+### Bug Fixes
+
+* Downgrade swr ([b2e9415](https://github.com/ryohidaka/use-backlog/commit/b2e94154122adfd4ad9777931736a61ec664af9e))
+
 ## [0.1.4](https://github.com/ryohidaka/use-backlog/compare/v0.1.3...v0.1.4) (2024-05-08)
 
 
