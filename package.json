@@ -65,6 +65,6 @@
   },
   "dependencies": {
     "backlog-js": "^0.13.1",
-    "swr": "^2.2.5"
+    "swr": "^2.2.4"
   }
 }
