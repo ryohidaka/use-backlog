@@ -61,7 +61,10 @@ export const useProject = (
     return project;
   };
 
-  const key = `project-${projectIdOrKey}`;
+  // Define the cache key for useSWR
+  const key = useMemo(() => {
+    return backlog ? `project-${projectIdOrKey}` : null;
+  }, [backlog]);
 
   // Using the useSWR hook to fetch the data
   const { data: project, ...rest } = useSWR(key, fetcher, swrConfig);

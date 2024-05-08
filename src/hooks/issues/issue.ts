@@ -53,6 +53,11 @@ export const useIssue = (
   // Getting the backlog instance
   const { backlog } = useBacklog();
 
+  // Define the cache key for useSWR
+  const key = useMemo(() => {
+    return backlog ? `issue-${issueIdOrKey}` : null;
+  }, [backlog]);
+
   // Defining the fetcher function
   const fetcher = async () => {
     if (!backlog) return null;
@@ -60,9 +65,6 @@ export const useIssue = (
     const issue = await backlog.getIssue(issueIdOrKey);
     return issue;
   };
-
-  // Define the cache key for useSWR
-  const key = `issue-${issueIdOrKey}`;
 
   // Using the useSWR hook to fetch the data
   const { data: issue, ...rest } = useSWR(key, fetcher, swrConfig);
