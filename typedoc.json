@@ -1,0 +1,10 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["./src"],
+  "exclude": ["./src/example/*", "./src/setupTests.ts", "./src/vite-env.d.ts"],
+  "hideGenerator": true,
+  "navigationLinks": {
+    "GitHub": "https://github.com/ryohidaka/use-backlog",
+    "npm": "https://www.npmjs.com/package/use-backlog"
+  }
+}

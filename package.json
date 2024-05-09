@@ -16,12 +16,13 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build --emptyOutDir false",
+    "build": "tsc && vite build --emptyOutDir false && npm run docs",
     "preview": "vite preview",
     "prepare": "husky install",
     "test": "VITEST_MIN_THREADS=6 VITEST_MAX_THREADS=6 vitest run --passWithNoTests",
     "coverage": "vitest run --coverage",
-    "format": "npx prettier . --write"
+    "format": "npx prettier . --write",
+    "docs": "npx typedoc"
   },
   "repository": {
     "type": "git",
@@ -50,6 +51,7 @@
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "prettier": "3.2.5",
+    "typedoc": "^0.25.13",
     "typescript": "^5.2.2",
     "vite": "^5.2.7",
     "vite-plugin-dts": "^3.8.1",

@@ -32,7 +32,7 @@ export default defineConfig({
     globals: true,
     setupFiles: ["./src/setupTests.ts"],
     coverage: {
-      exclude: ["**/**/index.ts", ".eslintrc.cjs", "src/example"],
+      exclude: ["**/**/index.ts", ".eslintrc.cjs", "src/example", "docs"],
     },
     environment: "happy-dom",
   },
